@@ -1,15 +1,7 @@
-From node:16-buster
-
-RUN mkdir -p /usr/src/app
-
-WORKDIR /usr/src/app
-
-COPY package*.json /usr/src/app/
-
+FROM node:16-buster
+WORKDIR /app
+COPY package*.json ./
 RUN npm install
-
-COPY ./ /usr/src/app/
-
+COPY ./ ./
 EXPOSE 3000
-
 CMD ["npm", "start"]
