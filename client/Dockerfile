@@ -1,7 +1,8 @@
 FROM node:16-buster
 WORKDIR /app
 COPY package*.json ./
-RUN npm install
+RUN ls -la /app
+#RUN npm install
 COPY . .
 EXPOSE 3000
 CMD ["npm", "start"]
