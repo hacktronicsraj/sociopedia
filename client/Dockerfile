@@ -8,7 +8,7 @@ COPY package*.json /usr/src/app/
 
 RUN npm NODE_ENV=development ci
 
-COPY . /usr/src/app/
+COPY ./ /usr/src/app/
 
 EXPOSE 3000
 
