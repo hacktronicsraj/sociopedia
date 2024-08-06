@@ -1,0 +1,48 @@
+name: CICD Pipeline
+
+on:
+ push:
+   branches: [main]
+ pull_request:
+   branches: [main]
+
+
+jobs:
+  Docker-Build:
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+    with:
+     node-version: '16'
+
+    - name: Setup Git Config
+      run: |
+        git config user.name "Git Actions Bot"
+        git config user.email "<>"
+    
+    - name: Install Dependencies
+      run: npm ci
+
+    - name: Build
+      run: npm run build
+
+    - name: Save Version
+      id: save_version
+      run: echo ::set-output name=tag::$(echo $(node -p -e "require('./package.json').version"))
+
+    - name: Incease Version
+      run: npm version patch
+
+    - name: Push new Version
+      run: git push
+
+    - name: Docker hub Login
+      run : echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+
+    - name: Create Docker Image
+      run : docker build ./server --file ./server/Dockerfile --tag ${{ secrets.DOCKERHUB_USERNAME }}/sociopedia:${{ steps.save_version.outputs.tag }}
+    
+    - name : Push to Docker Hub
+      run : docker push ${{ secrets.DOCKERHUB_USERNAME }}/sociopedia:${{ steps.save_version.outputs.tag }}
+
