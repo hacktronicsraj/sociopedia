@@ -12,10 +12,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: check out the code
 
-      - uses: mr-smithers-excellent/docker-build-push@v6
       - name: Build and Push Docker Image
+        uses: mr-smithers-excellent/docker-build-push@v6
         with:
           image: rajashekar1/social-media
           tags: client
@@ -26,12 +25,12 @@ jobs:
 
   Server-Build-and-Deploy:
     runs-on: ubuntu-latest
+    needs: Client-Build-and-Deploy
     steps:
       - uses: actions/checkout@v3
-      - name: check out the code
 
-      - uses: mr-smithers-excellent/docker-build-push@v6
       - name: Build and Push Docker Image
+        uses: mr-smithers-excellent/docker-build-push@v6
         with:
           image: rajashekar1/social-media
           tags: server
