@@ -1,7 +1,7 @@
 FROM node:18-buster
 WORKDIR /app
-COPY /client/package.json ./
-COPY /client/package-lock.json ./
+COPY package.json ./
+COPY package-lock.json ./
 RUN npm install
 COPY . .
 EXPOSE 3000
