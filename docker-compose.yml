@@ -1,0 +1,45 @@
+version: "3"
+
+services:
+
+  backend:
+    # build: server
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    image: rajashekar1/sociopedia:server
+    container_name: server
+    restart: always
+    ports:
+      - 5001:5001
+    volumes:
+      - ./server:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - mongo
+    env_file: ./server/.env
+    networks:
+      - express-mongo
+      - react-express
+
+  frontend:
+    # build: client
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    image: rajashekar1/sociopedia:client
+    container_name: client
+    restart: always
+    ports:
+      - 3000:3000
+    stdin_open: true
+    volumes:
+      - ./client:/usr/app
+      - /usr/app/node_modules
+    networks:
+      - react-express
+    depends_on:
+      - backend
+
+networks:
+  react-express:

@@ -57,8 +57,8 @@ app.use('/users', userRoutes);
 app.use('/posts', postRoutes);
 // mongoose setup
 
-const PORT = process.env.PORT || 6001;
-const MONGO_URL = process.env.MONGO_URL;
+const PORT = process.env.PORT || 5001;
+const MONGO_URL = 'mongodb+srv://amazonkosam221:qu75M6lKXPOwWjBG@cluster0.uk7fokj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 
 mongoose.connect(MONGO_URL, {
     useNewUrlParser: true,
