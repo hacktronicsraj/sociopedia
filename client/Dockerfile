@@ -1,4 +1,4 @@
-FROM 22-alpine3.19
+FROM node:16
 WORKDIR /app
 COPY /client/package.json ./
 COPY /client/package-lock.json ./
