@@ -3,6 +3,6 @@ WORKDIR /app
 COPY /client/package.json ./
 COPY /client/package-lock.json ./
 RUN npm install
-COPY ./client .
+COPY . .
 EXPOSE 3000
 CMD ["npm", "start"]

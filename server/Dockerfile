@@ -3,6 +3,6 @@ WORKDIR /app
 COPY /server/package.json ./
 COPY /server/package-lock.json ./
 RUN npm install
-COPY ./server .
+COPY . .
 EXPOSE 5001
 CMD ["npm", "run", "server"]
