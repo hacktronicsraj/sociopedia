@@ -15,11 +15,8 @@ services:
     volumes:
       - ./server:/usr/src/app
       - /usr/src/app/node_modules
-    depends_on:
-      - mongo
     env_file: ./server/.env
     networks:
-      - express-mongo
       - react-express
 
   frontend:
