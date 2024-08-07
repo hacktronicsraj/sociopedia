@@ -1,4 +1,4 @@
-FROM node:16-buster
+FROM node:18
 WORKDIR /app
 COPY /client/package.json ./
 COPY /client/package-lock.json ./
