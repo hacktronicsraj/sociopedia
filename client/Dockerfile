@@ -1,8 +1,8 @@
-FROM node:18-buster
+FROM node:16-buster
 WORKDIR /app
-COPY package.json ./
-COPY package-lock.json ./
+COPY /client/package.json ./
+COPY /client/package-lock.json ./
 RUN npm install
-COPY . .
+COPY ./client .
 EXPOSE 3000
 CMD ["npm", "start"]

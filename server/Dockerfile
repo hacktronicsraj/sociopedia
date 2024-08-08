@@ -1,8 +1,8 @@
-FROM node:18-buster
+FROM node:16-buster
 WORKDIR /app
-COPY package.json ./
-COPY package-lock.json ./
+COPY /server/package.json ./
+COPY /server/package-lock.json ./
 RUN npm install
-COPY . .
+COPY ./server .
 EXPOSE 5001
 CMD ["npm", "run", "server"]
